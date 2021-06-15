@@ -3,6 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SendEmailController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::group(['prefix' => 'v1'], function () {
-    Route::post('/login', 'UsersController@login');
-    Route::post('/register', 'UsersController@register');
-    Route::get('/logout', 'UsersController@logout')->middleware('auth:api');
+    Route::post('/login', [UsersController::class, 'login']);
+    Route::post('/sendmail', [SendEmailController::class, 'sendEmail']);
+    Route::post('/register', [UsersController::class, 'register']);
+    Route::get('/logout', [UsersController::class, 'logout'])->middleware('auth:api');
 });

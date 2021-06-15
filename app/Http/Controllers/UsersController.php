@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Validator;
+use  App\Models\User;
 
 use Illuminate\Http\Request;
+
 
 class UsersController extends Controller
 {
@@ -32,11 +35,12 @@ class UsersController extends Controller
       $validator = Validator::make($request->all(), [
           'fname' => 'required',
           'lname' => 'required',
-          'phone' => 'required|unique:users|regex:/(0)[0-9]{10}/',
+          'phone' => 'required|unique:users',
           'email' => 'required|email|unique:users',
           'password' => 'required',
       ]);
       if ($validator->fails()) {
+      
         return response()->json([
           'success' => false,
           'message' => $validator->errors(),
