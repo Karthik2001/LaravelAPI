@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Validator;
 use  App\Models\User;
-
+use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Http\Request;
 
 
 class UsersController extends Controller
 {
+  
     
   public function login()
   {
@@ -38,6 +41,10 @@ class UsersController extends Controller
           'phone' => 'required|unique:users',
           'email' => 'required|email|unique:users',
           'password' => 'required',
+          'user_name'=>'required',
+          'age'=>'required',
+          'location'=>'required',
+          'bio'=>'required'
       ]);
       if ($validator->fails()) {
       
